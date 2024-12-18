@@ -29,6 +29,8 @@ CREATE TABLE patients (
     nom_patients VARCHAR(50) NOT NULL,
     prenom_patients VARCHAR(50) NOT NULL,
     telephone_patiens VARCHAR(15) NOT NULL,
+    email_patiens VARCHAR(128) NOT NULL,
+    mot_de_passe VARCHAR(255) NOT NULL,
 );
 
 -- Création de la table lieu
