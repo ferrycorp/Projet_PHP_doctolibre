@@ -9,13 +9,16 @@
     <!-- Google Font - Great Vibes -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <!-- CSS commun -->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/rendez_vous_passé.css">
 </head>
 <body>
     <!-- En-tête -->
-    <header class="header py-3">
-        <div class="container-fluid d-flex align-items-center">
-            <h1 class="logo me-auto ms-3">Doctolibre</h1>
+    <header class="header py-3 navbar-custom">
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+            <!-- Lien vers la page de connexion_patient.php, sans soulignement -->
+            <a href="connexion_patient.php" class="text-decoration-none">
+                <h1>Doctolibre</h1>
+            </a>
         </div>
     </header>
 
@@ -35,7 +38,7 @@
                             <p class="mb-0">Durée : 20 min</p>
                         </div>
                         <a href="recherche.php" class="btn btn-custom">
-                            <img src="../image/calendar.svg" alt="">
+                            <img src="../image/calendar.svg" alt="calendar icon">
                             Reprendre rendez-vous
                         </a> 
                     </div>
@@ -47,10 +50,9 @@
                             <p class="mb-0">28/04/2024</p>
                             <p class="mb-0">Durée : 20 min</p>
                         </div>
-
                         <a href="recherche.php" class="btn btn-custom">
-                            <img src="../image/calendar.svg" alt="">
-                             Reprendre rendez-vous
+                            <img src="../image/calendar.svg" alt="calendar icon">
+                            Reprendre rendez-vous
                         </a>
                     </div>
                 </div>
@@ -60,7 +62,7 @@
             <div class="col-md-4">
                 <div class="text-center">
                     <a href="recherche.php" class="btn btn-custom">
-                        <img src="../image/calendar.svg" alt="">
+                        <img src="../image/calendar.svg" alt="calendar icon">
                         Reprendre rendez-vous
                     </a>
                 </div>
