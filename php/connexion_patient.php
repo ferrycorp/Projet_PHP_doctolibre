@@ -1,3 +1,9 @@
+<?php
+if (isset($_SESSION)) {
+    header("location:accueil.php");
+    exit;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -37,11 +43,11 @@
                 <form action="recherche.php" method="post">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="exemple@gmail.com" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="exemple@gmail.com" required value="<?php if(isset($_COOKIE["user"])) echo $_COOKIE["user"];?>">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="********" required>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="********" required value="<?php if(isset($_COOKIE["pwd"])) echo $_COOKIE["pwd"];?>">
                     </div>
                     <button type="submit" class="btn btn-custom w-100">Se connecter</button>
                     <?php if (!empty($error)): ?>
@@ -60,6 +66,11 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <?php
+        if (isset($_GET["msg"])) {
+            echo "<div class=\"msg\">".$_GET["msg"]."</div>";
+        }
+    ?>
 </body>
 </html>
 
