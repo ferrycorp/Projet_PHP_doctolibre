@@ -24,7 +24,6 @@ if(isset($_REQUEST["btn"])) {
         if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             // Si existe
             $_SESSION['user'] = $row["id"];
-            $_SESSION['full_name'] = "Dr. ".strtoupper($row['nom'])." ".ucwords($row['prenom']);
             header("location:recherche.php");
             exit;
         }
