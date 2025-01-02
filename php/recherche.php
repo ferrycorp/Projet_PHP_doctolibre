@@ -10,27 +10,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <!-- Styles personnalisés -->
     <link rel="stylesheet" href="../css/style.css">
-
-    <style>
-        /* Définir la couleur bleue personnalisée */
-        .navbar-custom, .btn-custom {
-            background-color: #2895D5; /* Bleu personnalisé #2895D5 */
-            color: white;
-        }
-
-        /* Hover effect pour les boutons */
-        .btn-custom:hover {
-            background-color: #1f78b7; /* Une teinte plus foncée de bleu au survol */
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/recherche.css">
 </head>
 <body>
     <!-- Header (Barre de navigation) -->
     <header class="header py-3 navbar-custom">
-        <div class="container-fluid d-flex align-items-center">
-            <h1 class="logo me-auto ms-3">Doctolibre</h1>
-        </div>
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+            <!-- Lien vers la page de connexion_patient.php, sans soulignement -->
+            <a href="connexion_patient.php" class="text-decoration-none">
+                <h1>Doctolibre</h1>
+            </a>
     </header>
 
     <!-- Bouton "Rendez-vous passé" en haut à droite -->

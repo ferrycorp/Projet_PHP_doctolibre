@@ -16,25 +16,24 @@ if (isset($_SESSION)) {
     <!-- Google Font - Great Vibes -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <!-- CSS commun -->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/connexion_patient.css">
 </head>
 <body>
     <!-- En-tête -->
     <header class="header py-3 navbar-custom">
-    <div class="container-fluid d-flex align-items-center">
-        <!-- Lien vers la page de connexion_patient.php, sans soulignement -->
-        <a href="connexion_patient.php" class="btn logo me-auto ms-3">
-            <h1>Doctolibre</h1>
-        </a>
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+            <!-- Lien vers la page de connexion_patient.php, sans soulignement -->
+            <a href="connexion_patient.php" class="text-decoration-none">
+                <h1>Doctolibre</h1>
+            </a>
 
-        <!-- Boutons de la navbar -->
-        <div class="d-flex">
-            <a href="connexion_medecin.php" class="btn btn-custom me-2">Vous êtes soignant ?</a>
+            <!-- Boutons de la navbar -->
+            <div>
+                <a href="connexion_medecin.php" class="btn btn-custom me-2">Vous êtes soignant ?</a>
+            </div>
         </div>
-    </div>
-</header>
+    </header>
 
-    
     <!-- Contenu principal -->
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -54,7 +53,6 @@ if (isset($_SESSION)) {
                         <div class="alert alert-danger mt-3"><?php echo $error; ?></div>
                     <?php endif; ?>
                     <!-- Lien pour s'inscrire -->
-                     
                     <div class="text-center">
                         <br>
                         <p>Pas de compte ? <a href="inscription_patient.php">S'inscrire</a></p>
@@ -73,4 +71,3 @@ if (isset($_SESSION)) {
     ?>
 </body>
 </html>
-

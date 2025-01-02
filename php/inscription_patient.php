@@ -9,14 +9,21 @@
     <!-- Google Font - Great Vibes -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <!-- CSS commun -->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/connexion_patient.css">
 </head>
 <body>
     <!-- En-tête -->
-    <header class="header py-3">
-        <div class="container-fluid d-flex align-items-center">
-            <h1 class="logo me-auto ms-3">Doctolibre</h1>
-            <a href="connexion_soignant.php" class="btn btn-soignant">Vous êtes soignant ?</a>
+    <header class="header py-3 navbar-custom">
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+            <!-- Lien vers la page de connexion_patient.php, sans soulignement -->
+            <a href="connexion_patient.php" class="text-decoration-none">
+                <h1>Doctolibre</h1>
+            </a>
+
+            <!-- Boutons de la navbar -->
+            <div>
+                <a href="connexion_medecin.php" class="btn btn-custom me-2">Vous êtes soignant ?</a>
+            </div>
         </div>
     </header>
 
