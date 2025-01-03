@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
+
+<?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    header("location:connexion_patient.php?msg=Veuillez vous connecter pour accéder à cette page.");
+    exit;
+}
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
