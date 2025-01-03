@@ -24,13 +24,13 @@ INSERT INTO horraire (heure_debut) VALUES
 ('15:00'),
 ('16:00');
 
--- Insertion des données pour la table patients
-INSERT INTO patients (nom_patients, prenom_patients, telephone_patiens, email_patiens, mot_de_passe) VALUES
-('Dupont', 'Jean', '0601020304', 'jean.dupont@exemple.com', 'pass123'),
-('Martin', 'Sophie', '0602030405', 'sophie.martin@exemple.com', 'pass123'),
-('Bernard', 'Luc', '0603040506', 'luc.bernard@exemple.com', 'pass123'),
-('Durand', 'Emma', '0604050607', 'emma.durant@exemple.com', 'pass123'),
-('Lemoine', 'Paul', '0605060708', 'paul.lemoine@exemple.com', 'pass123');
+-- Insertion des données pour la table patients (avec date de naissance, sexe, code postal, adresse)
+INSERT INTO patients (nom_patients, prenom_patients, telephone_patients, email_patients, mot_de_passe, date_naissance, sexe, code_postal, adresse) VALUES
+('Dupont', 'Jean', '0601020304', 'jean.dupont@exemple.com', 'pass123', '1980-05-15', 'Masculin', '75001', '12 Rue de Paris, 75001 Paris'),
+('Martin', 'Sophie', '0602030405', 'sophie.martin@exemple.com', 'pass123', '1990-07-22', 'Féminin', '69001', '34 Boulevard des Alpes, 69001 Lyon'),
+('Bernard', 'Luc', '0603040506', 'luc.bernard@exemple.com', 'pass123', '1985-03-10', 'Masculin', '13001', '56 Avenue du Prado, 13001 Marseille'),
+('Durand', 'Emma', '0604050607', 'emma.durant@exemple.com', 'pass123', '1992-11-30', 'Féminin', '33000', '78 Rue Sainte-Catherine, 33000 Bordeaux'),
+('Lemoine', 'Paul', '0605060708', 'paul.lemoine@exemple.com', 'pass123', '1978-09-14', 'Masculin', '31000', '90 Rue de la République, 31000 Toulouse');
 
 -- Insertion des données pour la table medecins
 INSERT INTO medecins (nom_medecins, prenom_medecins, telephone_medecins, email_medecins, mot_de_passe, lieu, specialite_id, horraire) VALUES

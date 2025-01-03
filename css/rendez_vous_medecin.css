@@ -1,8 +1,8 @@
-
+/* Header */
 .header {
     display: flex;
     flex-direction: row;
-    align-items: start; /* Centre verticalement le contenu */
+    align-items: center; /* Centre verticalement le contenu */
     padding: 0px;
     position: absolute;
     width: 100%;
@@ -10,6 +10,7 @@
     left: 0px;
     top: 0px;
     background-color: #2895D5; /* Bleu pour la barre */
+    justify-content: flex-start; /* Aligne les éléments à gauche */
 }
 
 .header h1 {
@@ -31,7 +32,7 @@
 }
 
 /* Contenu principal */
-.form-container {
+.container {
     margin-top: 15%; /* Pour éviter le chevauchement avec le header */
     padding: 20px;
     border: 1px solid #ddd;
@@ -43,12 +44,3 @@ body {
     margin: 0;
     padding: 0;
 }
-
-
-
-
-
-
-
-
-

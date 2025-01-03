@@ -11,6 +11,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+    align-items: center; /* Centre verticalement le contenu */
     padding: 0px;
     position: absolute;
     width: 100%;

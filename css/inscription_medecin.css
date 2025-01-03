@@ -1,8 +1,8 @@
-
 .header {
     display: flex;
     flex-direction: row;
-    align-items: start; /* Centre verticalement le contenu */
+    align-items: flex-start;
+    align-items: center; /* Centre verticalement le contenu */
     padding: 0px;
     position: absolute;
     width: 100%;
@@ -43,12 +43,3 @@ body {
     margin: 0;
     padding: 0;
 }
-
-
-
-
-
-
-
-
-

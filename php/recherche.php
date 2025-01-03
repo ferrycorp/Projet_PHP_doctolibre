@@ -2,11 +2,11 @@
 <html lang="fr">
 
 <?php
-//session_start();
-//if (!isset($_SESSION['user'])) {
-//    header("location:connexion_patient.php?msg=Veuillez vous connecter pour accéder à cette page.");
-//    exit;
-//}
+// session_start();
+// if (!isset($_SESSION['user'])) {
+//     header("location:connexion_patient.php?msg=Veuillez vous connecter pour accéder à cette page.");
+//     exit;
+// }
 ?>
 
 <head>
@@ -18,17 +18,20 @@
     <!-- Google Font - Great Vibes -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <!-- Styles personnalisés -->
-    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/recherche.css">
 </head>
+
 <body>
     <!-- Header (Barre de navigation) -->
     <header class="header py-3 navbar-custom">
         <div class="container-fluid d-flex align-items-center justify-content-between">
-            <!-- Lien vers la page de connexion_patient.php, sans soulignement -->
             <a href="connexion_patient.php" class="text-decoration-none">
                 <h1>Doctolibre</h1>
             </a>
+            <div>
+                <a href="connexion_medecin.php" class="btn btn-custom">Vous êtes soignant ?</a>
+            </div>
+        </div>
     </header>
 
     <!-- Bouton "Rendez-vous passé" en haut à droite -->
@@ -104,4 +107,5 @@
         document.getElementById('searchInput').addEventListener('input', searchDoctors);
     </script>
 </body>
+
 </html>
