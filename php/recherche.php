@@ -2,11 +2,11 @@
 <html lang="fr">
 
 <?php
-session_start();
-if (!isset($_SESSION['user'])) {
-    header("location:connexion_patient.php?msg=Veuillez vous connecter pour accéder à cette page.");
-    exit;
-}
+//session_start();
+//if (!isset($_SESSION['user'])) {
+//    header("location:connexion_patient.php?msg=Veuillez vous connecter pour accéder à cette page.");
+//    exit;
+//}
 ?>
 
 <head>
