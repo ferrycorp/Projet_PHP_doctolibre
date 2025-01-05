@@ -1,23 +1,34 @@
 <?php
 include_once('database.php');
 
-// Connexion à la base de données
-$conn = dbConnect();
+// Vérifier si la connexion à la base de données a réussi
+if (!$databaseConnected) {
+    echo '<p>Erreur de connexion à la base de données. <a href="index.php">Retour à l\'accueil</a></p>';
+    exit;
+}
 
-// Utilisation d'un ID de patient spécifique pour tester
-$id_patient = 1; // Remplacer par l'ID d'un patient existant pour tester
+// Définir la table, la colonne, et la valeur pour la requête
+$table = "patients";
+$column = "id_patients";
+$value = 1; // ID du patient que vous souhaitez récupérer
 
-// Requête pour récupérer les informations du patient
-$query = "SELECT * FROM patients WHERE id_patients = :id";
-$stmt = $conn->prepare($query);
-$stmt->bindParam(':id', $id_patient, PDO::PARAM_INT);
-$stmt->execute();
+try {
+    // Construire et exécuter la requête SQL
+    $query = "SELECT * FROM " . $table . " WHERE " . $column . " = ?;";
+    $request = $conn->prepare($query);
+    $request->bindParam(1, $value, PDO::PARAM_INT);
+    $request->execute();
 
-// Vérifier si le patient existe
-$patient = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Récupérer les données du patient
+    $patient = $request->fetch(PDO::FETCH_ASSOC);
 
-if (!$patient) {
-    echo 'Patient non trouvé.';
+    // Vérifier si le patient existe
+    if (!$patient) {
+        echo '<p>Patient non trouvé. <a href="index.php">Retour à l\'accueil</a></p>';
+        exit;
+    }
+} catch (PDOException $e) {
+    echo '<p>Erreur lors de la récupération des informations. <a href="index.php">Retour à l\'accueil</a></p>';
     exit;
 }
 ?>
@@ -30,14 +41,16 @@ if (!$patient) {
     <title>Fiche Patient - Doctolibre</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/fiche_patient.css"> <!-- Lien vers le CSS spécifique -->
+    <link rel="stylesheet" href="../css/fiche_patient.css">
 </head>
 <body>
     <!-- En-tête -->
-    <header class="header">
-        <a href="index.php" class="text-decoration-none">
-            <h1>Doctolibre</h1>
-        </a>
+    <header class="header py-3 navbar-custom">
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="connexion_patient.php" class="text-decoration-none">
+                <h1>Doctolibre</h1>
+            </a>
+        </div>
     </header>
 
     <!-- Contenu principal -->
@@ -48,7 +61,7 @@ if (!$patient) {
                 <p><strong>Nom :</strong> <?php echo htmlspecialchars($patient['nom_patients']); ?></p>
                 <p><strong>Prénom :</strong> <?php echo htmlspecialchars($patient['prenom_patients']); ?></p>
                 <p><strong>Téléphone :</strong> <?php echo htmlspecialchars($patient['telephone_patients']); ?></p>
-                <p><strong>Email :</strong> <?php echo htmlspecialchars($patient['email_patiens']); ?></p>
+                <p><strong>Email :</strong> <?php echo htmlspecialchars($patient['email_patients']); ?></p>
                 <p><strong>Date de naissance :</strong> <?php echo htmlspecialchars($patient['date_naissance']); ?></p>
                 <p><strong>Sexe :</strong> <?php echo htmlspecialchars($patient['sexe']); ?></p>
             </div>
@@ -57,8 +70,6 @@ if (!$patient) {
                 <p><strong>Adresse :</strong> <?php echo htmlspecialchars($patient['adresse']); ?></p>
             </div>
         </div>
-        <a href="modification_patient.php?id=<?php echo $patient['id_patients']; ?>" class="btn btn-custom">Modifier les informations</a>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

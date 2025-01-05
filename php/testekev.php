@@ -3,7 +3,7 @@
 $host = 'localhost'; // PostgreSQL host
 $dbname = 'doctolibre'; 
 $username = 'postgres'; 
-$password = 'isen';
+$password = 'isen'; 
 
 $databaseConnected = false;
 
@@ -14,5 +14,13 @@ try {
     $databaseConnected = true;
 } 
 catch (PDOException $e) {
-    //nothing to see here :( the site will modify itself if the database is not connected !
+    echo "Bah ca marche pas";
 }
+
+if($databaseConnected){
+  echo "youpi";
+}
+else{
+  echo "triste";
+}
+?>

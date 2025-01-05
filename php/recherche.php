@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<?php
-// session_start();
-// if (!isset($_SESSION['user'])) {
-//     header("location:connexion_patient.php?msg=Veuillez vous connecter pour accéder à cette page.");
-//     exit;
-// }
-?>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,28 +11,68 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <!-- Styles personnalisés -->
     <link rel="stylesheet" href="../css/recherche.css">
+    <style>
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            width: 100%;
+            background-color: #2895D5; 
+            position: relative;
+            z-index: 1000;
+        }
+
+        .header h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: rgb(0, 0, 0);
+            margin: 0;
+        }
+
+        .btn-custom {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .btn-custom:hover {
+            background-color: #003d80;
+            color: white;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 100px; /* Ajuste cette valeur selon la hauteur du header */
+        }
+    </style>
 </head>
 
 <body>
     <!-- Header (Barre de navigation) -->
-    <header class="header py-3 navbar-custom">
+    <header class="header">
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <a href="connexion_patient.php" class="text-decoration-none">
                 <h1>Doctolibre</h1>
             </a>
-            <div>
-                <a href="connexion_medecin.php" class="btn btn-custom">Vous êtes soignant ?</a>
-            </div>
         </div>
     </header>
 
-    <!-- Bouton "Rendez-vous passé" en haut à droite -->
-    <div class="container mt-3 d-flex justify-content-end">
+    <div class="container d-flex justify-content-end">
         <a href="rendez_vous_passé.php" class="btn btn-custom mb-2">Rendez-vous passé</a>
     </div>
 
     <!-- Recherche -->
-    <div class="container mt-5">
+    <div class="container">
         <div class="form-group mb-4">
             <input type="text" class="form-control" id="searchInput" placeholder="Rechercher un médecin..." aria-label="Rechercher">
         </div>
@@ -54,38 +86,6 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        async function fetchDoctors() {
-            try {
-                const response = await fetch('database.php'); // Chemin du script PHP
-                if (!response.ok) {
-                    throw new Error('Erreur lors de la récupération des données.');
-                }
-                const data = await response.json();
-                return data;
-            } catch (error) {
-                console.error('Erreur :', error);
-                return [];
-            }
-        }
-
-        // Exemple de médecins à partir de la base de données
-        fetchDoctors().then(data => {
-            const doctors = data.map(doctor => ({
-                nom: doctor.nom,
-                prenom: doctor.prenom,
-                specialite: doctor.specialite,
-                ville: doctor.ville,
-                id: doctor.id
-            }));
-
-            console.log(doctors);
-
-            // Exemple d'affichage dans la console
-            doctors.forEach(doc => {
-                console.log(`Nom: ${doc.nom}, Prénom: ${doc.prenom}, Spécialité: ${doc.specialite}, Ville: ${doc.ville}, ID: ${doc.id}`);
-            });
-        });
-        
         // Exemple de médecins à partir de la base de données
         const doctors = [
             { nom: 'Lemoine', prenom: 'Alice', specialite: 'Cardiologie', ville: 'Paris', id: 1 },
