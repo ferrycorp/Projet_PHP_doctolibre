@@ -1,16 +1,23 @@
 <?php
 include_once('database.php');
+session_start();  // Démarre la session pour récupérer les informations du patient connecté
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['id_patients'])) {
+    echo '<p>Veuillez vous connecter pour accéder à votre fiche. <a href="connexion_patient.php">Connexion</a></p>';
+    exit;
+}
 
 // Vérifier si la connexion à la base de données a réussi
-if (!$databaseConnected) {
-    echo '<p>Erreur de connexion à la base de données. <a href="index.php">Retour à l\'accueil</a></p>';
+if (!$databaseConnexion) {
+    echo '<p>Erreur de connexion à la base de données. <a href="rendez_vous_medecin.php">Retour à l\'accueil</a></p>';
     exit;
 }
 
 // Définir la table, la colonne, et la valeur pour la requête
 $table = "patients";
 $column = "id_patients";
-$value = 1; // ID du patient que vous souhaitez récupérer
+$value = $_SESSION['id_patients'];  // Utiliser l'ID du patient connecté
 
 try {
     // Construire et exécuter la requête SQL
@@ -24,11 +31,11 @@ try {
 
     // Vérifier si le patient existe
     if (!$patient) {
-        echo '<p>Patient non trouvé. <a href="index.php">Retour à l\'accueil</a></p>';
+        echo '<p>Patient non trouvé. <a href="rendez_vous_medecin.php">Retour à l\'accueil</a></p>';
         exit;
     }
 } catch (PDOException $e) {
-    echo '<p>Erreur lors de la récupération des informations. <a href="index.php">Retour à l\'accueil</a></p>';
+    echo '<p>Erreur lors de la récupération des informations. <a href="rendez_vous_medecin.php">Retour à l\'accueil</a></p>';
     exit;
 }
 ?>
@@ -50,6 +57,9 @@ try {
             <a href="connexion_patient.php" class="text-decoration-none">
                 <h1>Doctolibre</h1>
             </a>
+            <div>
+                <a href="deconnexion.php" class="btn btn-danger btn-sm">Se déconnecter</a>
+            </div>
         </div>
     </header>
 
@@ -70,6 +80,16 @@ try {
                 <p><strong>Adresse :</strong> <?php echo htmlspecialchars($patient['adresse']); ?></p>
             </div>
         </div>
+
+        <!-- Autres informations si nécessaire -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h4>Rendez-vous et Historique Médical</h4>
+                <p>Vous pouvez ajouter des informations concernant les rendez-vous médicaux ou l'historique médical ici.</p>
+                <!-- Vous pouvez ajouter ici des sections supplémentaires si nécessaire -->
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -32,7 +32,7 @@
 
 /* Contenu principal */
 .form-container {
-    margin-top: 15%; /* Pour éviter le chevauchement avec le header */
+    margin-top: 10%; /* Pour éviter le chevauchement avec le header */
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;

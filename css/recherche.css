@@ -33,3 +33,17 @@
     background-color: #003d80;
     color: white;
 }
+
+
+.container {
+    margin-top: 15%; /* Pour éviter le chevauchement avec le header */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}

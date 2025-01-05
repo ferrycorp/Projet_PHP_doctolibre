@@ -1,4 +1,5 @@
 <?php
+include_once('session.php');
 include_once('database.php');
 session_start();
 
@@ -63,12 +64,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </a>
             <div>
                 <a href="connexion_medecin.php" class="btn btn-custom me-2">Vous êtes soignant ?</a>
+                <div>
+                     <a href="deconnexion.php" class="btn btn-danger">Déconnexion</a>
+                </div>
+               
             </div>
+            
         </div>
     </header>
-
     <!-- Contenu principal -->
-    <div class="container mt-5">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 form-container">
                 <h3 class="text-center mb-4">Connectez-vous</h3>
@@ -93,6 +98,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <p>Pas de compte ? <a href="inscription_patient.php">S'inscrire</a></p>
                     </div>
                 </form>
+                    <!-- Message de rôle et nom de l'utilisateur (Sous l'en-tête, avant le contenu principal) -->
+                    <!-- Message de rôle et nom de l'utilisateur (Sous l'en-tête, avant le contenu principal) -->
+                    <div class="container mt-3">
+                        <div class="alert alert-info text-center" role="alert">
+                        <?php echo $_SESSION['roleMessage']; ?> <br>
+                        <?php
+                        if (isset($_SESSION['nom_utilisateur']) && $_SESSION['nom_utilisateur'] !== '') {
+                        echo 'Bienvenue, ' . $_SESSION['nom_utilisateur'] . ' !';
+                        }
+                        ?>
+                        </div>
+                    </div>
+                 
+                </div>
             </div>
         </div>
     </div>
