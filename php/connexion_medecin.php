@@ -1,3 +1,46 @@
+<?php
+include_once('database.php');
+session_start();
+
+$error = ''; // Pour afficher les erreurs de connexion
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = trim($_POST['user']);
+    $password = trim($_POST['pwd']);
+
+    if (!empty($email) && !empty($password)) {
+        try {
+            // Requête préparée pour récupérer l'utilisateur par email
+            $query = "SELECT * FROM medecins WHERE email_medecins = ?;";
+            $stmt = $conn->prepare($query);
+            $stmt->execute([$email]);
+            $medecin = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($patient && $password === $patient['mot_de_passe']) {  // Comparaison directe
+                // Connexion réussie
+                $_SESSION['email'] = $medecin['email_medecins'];
+                $_SESSION['id_patients'] = $medecin['id_medecins'];
+
+                // Gestion du cookie "Se souvenir de moi"
+                if (isset($_POST['remember'])) {
+                    setcookie('user', $email, time() + 86400 * 30, '/'); // Cookie pour 30 jours
+                    setcookie('pwd', $password, time() + 86400 * 30, '/'); // Cookie pour 30 jours
+                }
+
+                header("Location: recherche.php"); // Redirige vers la page de recherche
+                exit;
+            } else {
+                $error = "Email ou mot de passe incorrect.";
+            }
+        } catch (PDOException $e) {
+            $error = "Erreur de connexion à la base de données.";
+        }
+    } else {
+        $error = "Veuillez remplir tous les champs.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
