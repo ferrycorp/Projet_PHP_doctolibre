@@ -54,6 +54,38 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        async function fetchDoctors() {
+            try {
+                const response = await fetch('database.php'); // Chemin du script PHP
+                if (!response.ok) {
+                    throw new Error('Erreur lors de la récupération des données.');
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Erreur :', error);
+                return [];
+            }
+        }
+
+        // Exemple de médecins à partir de la base de données
+        fetchDoctors().then(data => {
+            const doctors = data.map(doctor => ({
+                nom: doctor.nom,
+                prenom: doctor.prenom,
+                specialite: doctor.specialite,
+                ville: doctor.ville,
+                id: doctor.id
+            }));
+
+            console.log(doctors);
+
+            // Exemple d'affichage dans la console
+            doctors.forEach(doc => {
+                console.log(`Nom: ${doc.nom}, Prénom: ${doc.prenom}, Spécialité: ${doc.specialite}, Ville: ${doc.ville}, ID: ${doc.id}`);
+            });
+        });
+        
         // Exemple de médecins à partir de la base de données
         const doctors = [
             { nom: 'Lemoine', prenom: 'Alice', specialite: 'Cardiologie', ville: 'Paris', id: 1 },
