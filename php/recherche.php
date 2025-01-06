@@ -131,6 +131,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                 <strong>Email :</strong> <?php echo htmlspecialchars($medecin['email_medecins']); ?><br>
                                 <strong>Adresse :</strong> <?php echo htmlspecialchars($medecin['code_postal'] . ' - ' . $medecin['ville']); ?>
                             </p>
+                            <a href="prendre-rendez-vous.php" class="btn btn-primary">
+                                Prendre un rendez-vous
+                            </a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
