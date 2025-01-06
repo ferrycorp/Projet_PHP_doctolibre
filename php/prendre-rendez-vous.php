@@ -40,24 +40,9 @@
                 <!-- Les jours seront générés dynamiquement -->
             </tbody>
         </table>
-
-        <!-- Formulaire de confirmation -->
-        <div id="appointmentForm" class="d-none">
-            <h3 class="mb-3">Confirmer le rendez-vous</h3>
-            <form action="confirmation.php" method="POST">
-                <input type="hidden" id="selectedDoctor" name="doctor_id">
-                <div class="mb-3">
-                    <label for="appointmentDate" class="form-label">Date</label>
-                    <input type="text" id="appointmentDate" name="date" class="form-control" readonly>
-                </div>
-                <div class="mb-3">
-                    <label for="appointmentTime" class="form-label">Heure</label>
-                    <input type="time" id="appointmentTime" name="time" class="form-control" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Confirmer</button>
-            </form>
-        </div>
-    </div>
+    <a href="recherche.php" class="btn btn-primary">
+        Prendre un rendez-vous
+    </a>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
