@@ -35,7 +35,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $query = "INSERT INTO patients (nom_patients, prenom_patients, telephone_patients, email_patients, mot_de_passe, date_naissance, sexe, code_postal, adresse) 
           VALUES (?, ?, ?, ?, ?, ? , ? , ? , ? )";
                 $stmt = $conn->prepare($query);
-                $stmt->execute([$nom, $prenom, $telephone, $email, $mot_de_passe, '0000-00-00', "", '00000', ""]);
+                $stmt->execute([
+                    $nom, 
+                    $prenom, 
+                    $telephone, 
+                    $email, 
+                    $mot_de_passe, // Mot de passe en clair (non recommandé)
+                    '1900-01-01', // Date de naissance non renseignée
+                    "M", // Sexe non renseigné
+                    "75001", // Code postal par défaut
+                    "adresse inconnue" // Adresse vide
+                ]);
                 $success = "Inscription réussie ! Vous pouvez maintenant vous connecter.";
             }
         } catch (PDOException $e) {
@@ -56,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Google Font - Great Vibes -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <!-- CSS commun -->
-    <link rel="stylesheet" href="../css/connexion_patient.css">
+    <link rel="stylesheet" href="../css/inscription_medecin.css">
 </head>
 <body>
     <!-- En-tête -->
@@ -72,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </header>
 
     <!-- Contenu principal -->
-    <div class="container mt-5">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 form-container">
                 <h3 class="text-center mb-4">Inscrivez-vous</h3>

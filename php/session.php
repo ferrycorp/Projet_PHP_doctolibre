@@ -4,7 +4,7 @@ session_start();  // Démarre la session
 include_once('database.php');  // Inclure la connexion à la base de données
 
 // Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['id_patients']) && !isset($_SESSION['id_medecin'])) {
+if (!isset($_SESSION['id_patients']) && !isset($_SESSION['id_medecins'])) {
     // Si aucun utilisateur n'est connecté, afficher un message
     $_SESSION['roleMessage'] = 'Aucun utilisateur n\'est connecté.';
     $_SESSION['nom_utilisateur'] = '';  // Aucun nom d'utilisateur à afficher
@@ -21,16 +21,16 @@ if (!isset($_SESSION['id_patients']) && !isset($_SESSION['id_medecin'])) {
         $patient = $stmt->fetch(PDO::FETCH_ASSOC);
         $_SESSION['nom_utilisateur'] = $patient['prenom_patients'] . ' ' . $patient['nom_patients']; // Stocker le nom complet
         $_SESSION['roleMessage'] = 'Vous êtes connecté en tant que Patient.';
-    } elseif (isset($_SESSION['id_medecin'])) {
+    } elseif (isset($_SESSION['id_medecins'])) {
         // Si l'utilisateur est un médecin
         $_SESSION['role'] = 'medecin';
         // Récupérer le nom du médecin
-        $query = "SELECT nom_medecin, prenom_medecin FROM medecins WHERE id_medecin = ?;";
+        $query = "SELECT nom_medecins, prenom_medecins FROM medecins WHERE id_medecins = ?;";
         $stmt = $conn->prepare($query);
-        $stmt->bindParam(1, $_SESSION['id_medecin'], PDO::PARAM_INT);
+        $stmt->bindParam(1, $_SESSION['id_medecins'], PDO::PARAM_INT);
         $stmt->execute();
         $medecin = $stmt->fetch(PDO::FETCH_ASSOC);
-        $_SESSION['nom_utilisateur'] = $medecin['prenom_medecin'] . ' ' . $medecin['nom_medecin']; // Stocker le nom complet
+        $_SESSION['nom_utilisateur'] = $medecin['prenom_medecins'] . ' ' . $medecin['nom_medecins']; // Stocker le nom complet
         $_SESSION['roleMessage'] = 'Vous êtes connecté en tant que Médecin.';
     }
 }

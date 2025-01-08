@@ -1,12 +1,15 @@
 <?php
 include_once('database.php');
-session_start();  // Démarre la session pour récupérer les informations du patient connecté
+session_start(); // Démarre la session pour vérifier les autorisations
 
-// Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['id_patients'])) {
-    echo '<p>Veuillez vous connecter pour accéder à votre fiche. <a href="connexion_patient.php">Connexion</a></p>';
+// Vérifier si l'ID du patient est passé dans l'URL
+if (!isset($_GET['patient_id']) || !is_numeric($_GET['patient_id'])) {
+    echo '<p>Identifiant du patient invalide. <a href="rendez_vous_medecin.php">Retour à l\'accueil</a></p>';
     exit;
 }
+
+// Récupérer l'ID du patient depuis l'URL
+$patient_id = intval($_GET['patient_id']);
 
 // Vérifier si la connexion à la base de données a réussi
 if (!$databaseConnexion) {
@@ -14,20 +17,15 @@ if (!$databaseConnexion) {
     exit;
 }
 
-// Définir la table, la colonne, et la valeur pour la requête
-$table = "patients";
-$column = "id_patients";
-$value = $_SESSION['id_patients'];  // Utiliser l'ID du patient connecté
-
 try {
-    // Construire et exécuter la requête SQL
-    $query = "SELECT * FROM " . $table . " WHERE " . $column . " = ?;";
-    $request = $conn->prepare($query);
-    $request->bindParam(1, $value, PDO::PARAM_INT);
-    $request->execute();
+    // Récupérer les informations du patient
+    $query = "SELECT * FROM patients WHERE id_patients = :id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':id', $patient_id, PDO::PARAM_INT);
+    $stmt->execute();
 
     // Récupérer les données du patient
-    $patient = $request->fetch(PDO::FETCH_ASSOC);
+    $patient = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // Vérifier si le patient existe
     if (!$patient) {
@@ -53,12 +51,20 @@ try {
 <body>
     <!-- En-tête -->
     <header class="header py-3 navbar-custom">
-        <div class="d-flex align-items-center justify-content-between">
-            <a href="connexion_patient.php" class="text-decoration-none">
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+            <a href="connexion_medecin.php" class="text-decoration-none">
                 <h1>Doctolibre</h1>
             </a>
             <div>
-                <a href="deconnexion.php" class="btn btn-danger btn-sm">Se déconnecter</a>
+                <a href="deconnexion.php" class="btn btn-danger">Déconnexion</a>
+                <div class="alert alert-info text-center" role="alert">
+                    <?php echo $_SESSION['roleMessage']; ?> <br>
+                    <?php
+                    if (isset($_SESSION['nom_utilisateur']) && $_SESSION['nom_utilisateur'] !== '') {
+                    echo 'Bienvenue, ' . $_SESSION['nom_utilisateur'] . ' !';
+                    }
+                    ?>
+                </div>
             </div>
         </div>
     </header>
@@ -68,27 +74,20 @@ try {
         <h2 class="text-center mb-4">Fiche du Patient</h2>
         <div class="row">
             <div class="col-md-6">
-                <p><strong>Nom :</strong> <?php echo htmlspecialchars($patient['nom_patients']); ?></p>
-                <p><strong>Prénom :</strong> <?php echo htmlspecialchars($patient['prenom_patients']); ?></p>
-                <p><strong>Téléphone :</strong> <?php echo htmlspecialchars($patient['telephone_patients']); ?></p>
-                <p><strong>Email :</strong> <?php echo htmlspecialchars($patient['email_patients']); ?></p>
-                <p><strong>Date de naissance :</strong> <?php echo htmlspecialchars($patient['date_naissance']); ?></p>
-                <p><strong>Sexe :</strong> <?php echo htmlspecialchars($patient['sexe']); ?></p>
+                <p><strong>Nom :</strong> <?= htmlspecialchars($patient['nom_patients']); ?></p>
+                <p><strong>Prénom :</strong> <?= htmlspecialchars($patient['prenom_patients']); ?></p>
+                <p><strong>Téléphone :</strong> <?= htmlspecialchars($patient['telephone_patients']); ?></p>
+                <p><strong>Email :</strong> <?= htmlspecialchars($patient['email_patients']); ?></p>
+                <p><strong>Date de naissance :</strong> <?= htmlspecialchars($patient['date_naissance']); ?></p>
+                <p><strong>Sexe :</strong> <?= htmlspecialchars($patient['sexe']); ?></p>
             </div>
             <div class="col-md-6">
-                <p><strong>Code postal :</strong> <?php echo htmlspecialchars($patient['code_postal']); ?></p>
-                <p><strong>Adresse :</strong> <?php echo htmlspecialchars($patient['adresse']); ?></p>
+                <p><strong>Code postal :</strong> <?= htmlspecialchars($patient['code_postal']); ?></p>
+                <p><strong>Adresse :</strong> <?= htmlspecialchars($patient['adresse']); ?></p>
             </div>
         </div>
 
-        <!-- Autres informations si nécessaire -->
-        <div class="row mt-4">
-            <div class="col-md-12">
-                <h4>Rendez-vous et Historique Médical</h4>
-                <p>Vous pouvez ajouter des informations concernant les rendez-vous médicaux ou l'historique médical ici.</p>
-                <!-- Vous pouvez ajouter ici des sections supplémentaires si nécessaire -->
-            </div>
-        </div>
+        <!-- Historique médical ou autres informations -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

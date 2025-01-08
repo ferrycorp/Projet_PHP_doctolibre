@@ -1,4 +1,5 @@
 <?php
+include_once('session.php');
 include_once('database.php'); // Inclure la connexion à la base de données
 
 $error = ''; // Variable pour les erreurs
@@ -20,11 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     try {
         // Construire la requête SQL dynamiquement
-        $query = "SELECT m.nom_medecins, m.prenom_medecins, m.telephone_medecins, m.email_medecins, s.nom_specialite, l.code_postal, l.ville 
-                  FROM medecins m
-                  INNER JOIN specialite s ON m.specialite_id = s.id_specialite
-                  INNER JOIN lieu l ON m.lieu = l.code_postal
-                  WHERE 1=1";
+        $query = "SELECT m.id_medecins, m.nom_medecins, m.prenom_medecins, m.telephone_medecins, m.email_medecins, s.nom_specialite, l.code_postal, l.ville 
+          FROM medecins m
+          INNER JOIN specialite s ON m.specialite_id = s.id_specialite
+          INNER JOIN lieu l ON m.lieu = l.code_postal
+          WHERE 1=1";
+
 
         $params = [];
         if (!empty($nom_medecin)) {
@@ -70,14 +72,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             <a href="connexion_patient.php" class="text-decoration-none">
                 <h1>Doctolibre</h1>
             </a>
-            <div>
-                <a href="rendez_vous_passé.php" class="btn btn-custom me-2">Rendez-vous passés</a>
-            </div>
+            
         </div>
+        <div>
+                     <a href="deconnexion.php" class="btn btn-danger">Déconnexion</a>
+                </div>
+        <div class="message">
+        <?php if (isset($_SESSION['roleMessage']) && $_SESSION['roleMessage'] !== ''): ?>
+            <div class="alert alert-info text-center" role="alert">
+                <?php echo $_SESSION['roleMessage']; ?> <br>
+                <?php
+                if (isset($_SESSION['nom_utilisateur']) && $_SESSION['nom_utilisateur'] !== '') {
+                    echo 'Bienvenue, ' . htmlspecialchars($_SESSION['nom_utilisateur']) . ' !';
+                }
+                ?>
+            </div>
+        <?php endif; ?>
+                
+    </div>
     </header>
+    
 
     <!-- Contenu principal -->
     <div class="container">
+        <div>
+        <a href="rendez_vous_passé.php" class="btn btn-custom me-2 ">Rendez-vous passés</a>
+                
+        </div>
         <h3 class="text-center mb-4">Recherchez un Médecin</h3>
         
         <!-- Formulaire de recherche -->
@@ -131,9 +152,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                 <strong>Email :</strong> <?php echo htmlspecialchars($medecin['email_medecins']); ?><br>
                                 <strong>Adresse :</strong> <?php echo htmlspecialchars($medecin['code_postal'] . ' - ' . $medecin['ville']); ?>
                             </p>
-                            <a href="prendre-rendez-vous.php" class="btn btn-primary">
+                            <a href="prendre-rendez-vous.php?medecin_id=<?php echo $medecin['id_medecins']; ?>" class="btn btn-primary">
                                 Prendre un rendez-vous
                             </a>
+
                         </li>
                     <?php endforeach; ?>
                 </ul>

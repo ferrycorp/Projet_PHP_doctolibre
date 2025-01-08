@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Google Font - Great Vibes -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <!-- CSS commun -->
-    <link rel="stylesheet" href="../css/connexion_patient.css">
+    <link rel="stylesheet" href="../css/connexion_medecin.css">
 </head>
 <body>
     <!-- En-tête -->
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </header>
     <!-- Contenu principal -->
-    <div class="container">
+    <div class="container ">
         <div class="row justify-content-center">
             <div class="col-md-6 form-container">
                 <h3 class="text-center mb-4">Connectez-vous</h3>
@@ -98,8 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <p>Pas de compte ? <a href="inscription_patient.php">S'inscrire</a></p>
                     </div>
                 </form>
-                    <!-- Message de rôle et nom de l'utilisateur (Sous l'en-tête, avant le contenu principal) -->
-                    <!-- Message de rôle et nom de l'utilisateur (Sous l'en-tête, avant le contenu principal) -->
+                    <!-- Message de rôle et nom de l'utilisateur -->
                     <div class="container mt-3">
                         <div class="alert alert-info text-center" role="alert">
                         <?php echo $_SESSION['roleMessage']; ?> <br>
