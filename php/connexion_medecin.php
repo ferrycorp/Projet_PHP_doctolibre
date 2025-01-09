@@ -5,14 +5,13 @@ session_start();
 
 $error = ''; // Variable pour stocker les messages d'erreur
 
-// Processus de connexion
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['user']);
     $password = trim($_POST['pwd']);
 
     if (!empty($email) && !empty($password)) {
         try {
-            // Requête préparée pour récupérer le médecin par email
+            // récupérer le médecin par email
             $query = "SELECT * FROM medecins WHERE email_medecins = ?;";
             $stmt = $conn->prepare($query);
             $stmt->execute([$email]);
@@ -24,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['email'] = $medecin['email_medecins'];
                 $_SESSION['id_medecins'] = $medecin['id_medecins'];
 
-                // Gestion du cookie "Se souvenir de moi"
+                // Gestion du cookie
                 if (isset($_POST['remember'])) {
                     setcookie('user', $email, time() + 86400 * 30, '/');
                     setcookie('pwd', $password, time() + 86400 * 30, '/');

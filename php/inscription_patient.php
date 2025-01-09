@@ -1,5 +1,5 @@
 <?php
-include_once('database.php'); // Inclure la connexion à la base de données
+include_once('database.php'); 
 
 $error = ''; // Variable pour stocker les erreurs
 $success = ''; // Variable pour stocker le message de succès
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Les mots de passe ne correspondent pas.";
     } else {
         try {
-            // Vérifier si l'email existe déjà dans la base de données
+            // Vérifier si l'email existe déjà dans la base
             $stmt = $conn->prepare("SELECT COUNT(*) FROM patients WHERE email_patients = ?");
             $stmt->execute([$email]);
             $count = $stmt->fetchColumn();
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($count > 0) {
                 $error = "Cet email est déjà utilisé.";
             } else {
-                // Insertion des données dans la base de données
+                // Insertion des données dans la base 
                 $query = "INSERT INTO patients (nom_patients, prenom_patients, telephone_patients, email_patients, mot_de_passe, date_naissance, sexe, code_postal, adresse) 
           VALUES (?, ?, ?, ?, ?, ? , ? , ? , ? )";
                 $stmt = $conn->prepare($query);
@@ -40,11 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $prenom, 
                     $telephone, 
                     $email, 
-                    $mot_de_passe, // Mot de passe en clair (non recommandé)
-                    '1900-01-01', // Date de naissance non renseignée
-                    "M", // Sexe non renseigné
+                    $mot_de_passe, // Mot de passe en clair
+                    '1900-01-01', // Date de naissance par default
+                    "M", // Sexe par defaut
                     "75001", // Code postal par défaut
-                    "adresse inconnue" // Adresse vide
+                    "adresse inconnue" 
                 ]);
                 $success = "Inscription réussie ! Vous pouvez maintenant vous connecter.";
             }

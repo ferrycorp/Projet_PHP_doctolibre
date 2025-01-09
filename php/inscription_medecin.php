@@ -1,10 +1,10 @@
 <?php
-include_once('database.php'); // Inclure la connexion à la base de données
+include_once('database.php'); 
 
 $error = ''; // Variable pour stocker les erreurs
 $success = ''; // Variable pour stocker le message de succès
 
-// Récupérer les spécialités et les codes postaux depuis la base de données
+// Récupérer les spécialités et les codes postaux
 try {
     $specialites = $conn->query("SELECT id_specialite, nom_specialite FROM specialite")->fetchAll(PDO::FETCH_ASSOC);
     $lieux = $conn->query("SELECT code_postal, ville FROM lieu")->fetchAll(PDO::FETCH_ASSOC);
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $lieu = trim($_POST['lieu']);
     $specialite_id = trim($_POST['specialite']);
 
-    // Vérification des champs
+    // si les champs sont vide
     if (empty($nom) || empty($prenom) || empty($telephone) || empty($email) || empty($mot_de_passe) || empty($confirm_email) || empty($confirm_password) || empty($lieu) || empty($specialite_id)) {
         $error = "Tous les champs doivent être remplis.";
     } elseif ($email !== $confirm_email) {
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($count > 0) {
                 $error = "Cet email est déjà utilisé.";
             } else {
-                // Insertion des données dans la base de données
+                // Insertion des données dans la base
                 $query = "INSERT INTO medecins (nom_medecins, prenom_medecins, telephone_medecins, email_medecins, mot_de_passe, lieu, specialite_id, horraire) 
                           VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $conn->prepare($query);
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Font - Great Vibes -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-    <!-- CSS commun -->
+    <!-- CSS-->
     <link rel="stylesheet" href="../css/connexion_medecin.css">
 </head>
 <body>

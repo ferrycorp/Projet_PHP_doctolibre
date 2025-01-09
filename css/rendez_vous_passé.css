@@ -1,4 +1,3 @@
-/* Global styles */
 body {
     margin: 0;
     padding: 0;
@@ -11,14 +10,14 @@ body {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    align-items: center; /* Centre verticalement le contenu */
+    align-items: center; 
     padding: 0px;
     position: absolute;
     width: 100%;
-    height: 20%; /* Height of the header */
+    height: 20%; 
     left: 0px;
     top: 0px;
-    background-color: #2895D5; /* Blue color */
+    background-color: #2895D5; 
 }
 
 .header h1 {
@@ -53,7 +52,7 @@ body {
 
 /* Main content */
 .container {
-    margin-top: 25%; /* Adds space below the header */
+    margin-top: 25%; 
     
 }
 
@@ -110,5 +109,5 @@ body {
 
 /* Adjust margin for the first section to add space below the header */
 .container.mt-5 {
-    margin-top: 80px; /* Increase space between header and main content */
+    margin-top: 80px; 
 }

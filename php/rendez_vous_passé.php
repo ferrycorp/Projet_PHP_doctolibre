@@ -1,6 +1,6 @@
 <?php
 include_once('database.php');
-session_start(); // Démarre la session pour récupérer l'id du patient connecté
+session_start(); 
 
 
 // Si l'utilisateur est connecté, récupérer l'ID du patient
@@ -9,7 +9,6 @@ if (!isset($_SESSION['id_patients'])) {
     exit;
 }
 
-// Récupérer la date actuelle
 $currentDate = date('Y-m-d');
 
 // Requête SQL pour récupérer les rendez-vous passés
@@ -71,13 +70,13 @@ $rendezvous = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <p class="mb-0"><strong>Commentaire</strong>: <?= htmlspecialchars($r['commentaire']) ?></p>
                 <p class="mb-0"><strong>Durée</strong>: 20 min</p>
             </div>
-            <!-- Bouton pour reprendre un rendez-vous avec le médecin -->
+            <!-- Bouton pour reprendre un rendez-vous avec le meme médecin -->
             <a href="prendre-rendez-vous.php?medecin_id=<?= $r['id_medecins']; ?>" class="btn btn-primary">
                 <img src="../image/calendar.svg" alt="calendar icon">
                 Prendre un rendez-vous
             </a>
         </div>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
         <?php else: ?>
         <p class="text-center">Aucun rendez-vous passé.</p>
         <?php endif;?>

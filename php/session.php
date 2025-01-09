@@ -1,11 +1,10 @@
 <?php
-session_start();  // Démarre la session
+session_start(); 
 
-include_once('database.php');  // Inclure la connexion à la base de données
+include_once('database.php'); 
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['id_patients']) && !isset($_SESSION['id_medecins'])) {
-    // Si aucun utilisateur n'est connecté, afficher un message
     $_SESSION['roleMessage'] = 'Aucun utilisateur n\'est connecté.';
     $_SESSION['nom_utilisateur'] = '';  // Aucun nom d'utilisateur à afficher
 } else {
@@ -13,7 +12,6 @@ if (!isset($_SESSION['id_patients']) && !isset($_SESSION['id_medecins'])) {
     if (isset($_SESSION['id_patients'])) {
         // Si l'utilisateur est un patient
         $_SESSION['role'] = 'patient';
-        // Récupérer le nom du patient
         $query = "SELECT nom_patients, prenom_patients FROM patients WHERE id_patients = ?;";
         $stmt = $conn->prepare($query);
         $stmt->bindParam(1, $_SESSION['id_patients'], PDO::PARAM_INT);
@@ -24,7 +22,6 @@ if (!isset($_SESSION['id_patients']) && !isset($_SESSION['id_medecins'])) {
     } elseif (isset($_SESSION['id_medecins'])) {
         // Si l'utilisateur est un médecin
         $_SESSION['role'] = 'medecin';
-        // Récupérer le nom du médecin
         $query = "SELECT nom_medecins, prenom_medecins FROM medecins WHERE id_medecins = ?;";
         $stmt = $conn->prepare($query);
         $stmt->bindParam(1, $_SESSION['id_medecins'], PDO::PARAM_INT);

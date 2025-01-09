@@ -2,14 +2,14 @@
 .header {
     display: flex;
     flex-direction: row;
-    align-items: start; /* Centre verticalement le contenu */
+    align-items: start; 
     padding: 0px;
     position: absolute;
     width: 100%;
-    height: 20%; /* Hauteur définie */
+    height: 20%; 
     left: 0px;
     top: 0px;
-    background-color: #2895D5; /* Bleu pour la barre */
+    background-color: #2895D5; 
 }
 
 .header h1 {
@@ -31,8 +31,8 @@
 }
 
 /* Contenu principal */
-.form-container {
-    margin-top: 10%; /* Pour éviter le chevauchement avec le header */
+.container {
+    margin-top: 15%; 
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;

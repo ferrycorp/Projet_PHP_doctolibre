@@ -1,11 +1,11 @@
 <?php
 include_once('session.php');
-include_once('database.php'); // Inclure la connexion à la base de données
+include_once('database.php'); 
 
 $error = ''; // Variable pour les erreurs
 $medecins = []; // Tableau pour stocker les résultats de recherche
 
-// Récupérer les spécialités et les codes postaux depuis la base de données
+// Récupérer les spécialités et les codes postaux
 try {
     $specialites = $conn->query("SELECT id_specialite, nom_specialite FROM specialite")->fetchAll(PDO::FETCH_ASSOC);
     $lieux = $conn->query("SELECT DISTINCT code_postal, ville FROM lieu")->fetchAll(PDO::FETCH_ASSOC);
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $lieu = isset($_GET['lieu']) ? trim($_GET['lieu']) : '';
 
     try {
-        // Construire la requête SQL dynamiquement
+        // requête SQL 
         $query = "SELECT m.id_medecins, m.nom_medecins, m.prenom_medecins, m.telephone_medecins, m.email_medecins, s.nom_specialite, l.code_postal, l.ville 
           FROM medecins m
           INNER JOIN specialite s ON m.specialite_id = s.id_specialite

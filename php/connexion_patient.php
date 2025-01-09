@@ -3,7 +3,7 @@ include_once('session.php');
 include_once('database.php');
 session_start();
 
-$error = ''; // Pour afficher les erreurs de connexion
+$error = ''; // afficher les erreurs de connexion
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['user']);
@@ -11,24 +11,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!empty($email) && !empty($password)) {
         try {
-            // Requête préparée pour récupérer l'utilisateur par email
+            // récupérer l'utilisateur par email
             $query = "SELECT * FROM patients WHERE email_patients = ?;";
             $stmt = $conn->prepare($query);
             $stmt->execute([$email]);
             $patient = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($patient && $password === $patient['mot_de_passe']) {  // Comparaison directe
+            if ($patient && $password === $patient['mot_de_passe']) {  // verification du mots de passe
                 // Connexion réussie
                 $_SESSION['email'] = $patient['email_patients'];
                 $_SESSION['id_patients'] = $patient['id_patients'];
 
-                // Gestion du cookie "Se souvenir de moi"
+                // Gestion du cookie 
                 if (isset($_POST['remember'])) {
-                    setcookie('user', $email, time() + 86400 * 30, '/'); // Cookie pour 30 jours
-                    setcookie('pwd', $password, time() + 86400 * 30, '/'); // Cookie pour 30 jours
+                    setcookie('user', $email, time() + 86400 * 30, '/');
+                    setcookie('pwd', $password, time() + 86400 * 30, '/'); 
                 }
 
-                header("Location: recherche.php"); // Redirige vers la page de recherche
+                header("Location: recherche.php"); 
                 exit;
             } else {
                 $error = "Email ou mot de passe incorrect.";

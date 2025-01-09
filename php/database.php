@@ -3,7 +3,7 @@
 $host = 'localhost'; // PostgreSQL
 $dbname = 'doctolibre'; //nom de la base de données
 $username = 'postgres'; 
-$password = 'isen'; // mot de passe a modifier celon l'utilisateur
+$password = 'isen'; // mot de passe a modifier selon l'utilisateur
 
 $databaseConnexion = false;
 

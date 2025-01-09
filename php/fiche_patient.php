@@ -1,14 +1,14 @@
 <?php
 include_once('database.php');
-session_start(); // Démarre la session pour vérifier les autorisations
+session_start();
 
-// Vérifier si l'ID du patient est passé dans l'URL
+// Vérifier si l'ID du patient est dans l'URL
 if (!isset($_GET['patient_id']) || !is_numeric($_GET['patient_id'])) {
     echo '<p>Identifiant du patient invalide. <a href="rendez_vous_medecin.php">Retour à l\'accueil</a></p>';
     exit;
 }
 
-// Récupérer l'ID du patient depuis l'URL
+// Récupérer l'ID depuis l'URL
 $patient_id = intval($_GET['patient_id']);
 
 // Vérifier si la connexion à la base de données a réussi
@@ -23,8 +23,6 @@ try {
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':id', $patient_id, PDO::PARAM_INT);
     $stmt->execute();
-
-    // Récupérer les données du patient
     $patient = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // Vérifier si le patient existe
@@ -86,8 +84,6 @@ try {
                 <p><strong>Adresse :</strong> <?= htmlspecialchars($patient['adresse']); ?></p>
             </div>
         </div>
-
-        <!-- Historique médical ou autres informations -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

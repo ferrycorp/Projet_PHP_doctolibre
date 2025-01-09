@@ -1,8 +1,7 @@
 <?php
 include_once('session.php');
-include_once('database.php'); // Connexion via database.php
+include_once('database.php'); 
 
-// Vérifier la connexion
 if (!$databaseConnexion) {
     die('Erreur : Impossible de se connecter à la base de données.');
 }
@@ -12,7 +11,7 @@ if (!isset($_SESSION['id_medecins'])) {
     die('Erreur : Aucun médecin connecté.');
 }
 
-// Récupération des rendez-vous du médecin connecté depuis la base de données
+// Récupération des rendez-vous du médecin connecté
 $query = "
     SELECT 
         r.commentaire,
@@ -35,11 +34,11 @@ $query = "
 
 try {
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':medecin_id', $_SESSION['id_medecins'], PDO::PARAM_INT); // Lier l'ID du médecin
+    $stmt->bindParam(':medecin_id', $_SESSION['id_medecins'], PDO::PARAM_INT); 
     $stmt->execute();
     $rendez_vous = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Trier les rendez-vous en matin et soir
+    // Trier les rendez-vous du matin et du soir
     $rendez_vous_matin = [];
     $rendez_vous_soir = [];
     foreach ($rendez_vous as $rdv) {
@@ -90,7 +89,7 @@ try {
     <div class="container">
         <h3 class="text-center">Rendez-vous à venir</h3>
 
-        <!-- Section des rendez-vous du matin -->
+        <!-- rendez-vous du matin -->
         <h4 class="mt-4">Rendez-vous du Matin</h4>
         <div class="row">
             <?php if (!empty($rendez_vous_matin)): ?>
@@ -113,7 +112,7 @@ try {
             <?php endif; ?>
         </div>
 
-        <!-- Section des rendez-vous du soir -->
+        <!-- rendez-vous du soir -->
         <h4 class="mt-4">Rendez-vous de l'après-midi</h4>
         <div class="row">
             <?php if (!empty($rendez_vous_soir)): ?>

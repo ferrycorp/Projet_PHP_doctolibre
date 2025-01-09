@@ -2,14 +2,14 @@
 .header {
     display: flex;
     flex-direction: row;
-    align-items: start; /* Centre verticalement le contenu */
+    align-items: start; 
     padding: 0px;
     position: absolute;
     width: 100%;
-    height: 20%; /* Hauteur définie */
+    height: 20%;
     left: 0px;
     top: 0px;
-    background-color: #2895D5; /* Bleu pour la barre */
+    background-color: #2895D5; 
 }
 
 .header h1 {
@@ -22,7 +22,7 @@
 .btn-custom {
     background-color: #2895D5;
     color: white;
-    margin-top: 20px;
+    margin-top: 2%;
     margin-right: 30px;
 }
 

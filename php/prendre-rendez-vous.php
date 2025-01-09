@@ -1,5 +1,4 @@
 <?php
-// Inclure la session et la base de données
 include_once('session.php');
 include_once('database.php');
 
@@ -9,7 +8,6 @@ if (!isset($_SESSION['id_patients'])) {
     exit;
 }
 
-// Initialiser les variables
 $error = '';
 $success = '';
 $medecin_id = isset($_GET['medecin_id']) ? (int)$_GET['medecin_id'] : 0;
@@ -43,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $date_rendezvous = $_POST['date_rendezvous'] ?? '';
     $horraire_id = $_POST['horraire_id'] ?? '';
 
-    // Validation des données
     if (empty($date_rendezvous) || empty($horraire_id)) {
         $error = "Veuillez remplir tous les champs.";
     } else {
@@ -57,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($alreadyBooked > 0) {
                 $error = "Ce créneau est déjà réservé. Veuillez en choisir un autre.";
             } else {
-                // Insérer le rendez-vous
+                // Insére le rendez-vous
                 $stmt = $conn->prepare("INSERT INTO rendezvous (commentaire, patients_id, medecin_id, code_postal, horraire, date_rendezvous)
                                         VALUES (?, ?, ?, ?, ?, ?)");
                 $stmt->execute([
